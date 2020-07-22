@@ -46,4 +46,4 @@ status è 'pending' quindi NON pagato ancora!
 
     SELECT `name`, `lastname`, `date_of_birth`, `document_type`
     FROM `ospiti`
-    WHERE `date_of_birth` LIKE '1975%' AND `document_type` LIKE 'Drive%'
+    WHERE `date_of_birth` LIKE '1975%' AND `document_type` = 'Driver License'

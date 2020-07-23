@@ -107,10 +107,12 @@ status è 'pending' quindi NON pagato ancora!
 /==============================================================================/
 5. Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
 
-    SELECT `ospite_id` AS ospite, COUNT(*) AS numero_prenotazioni
+    SELECT `ospite_id` AS ospite, `name`, `lastname`, COUNT(`prenotazione_id`) AS numero_prenotazioni
     FROM `prenotazioni_has_ospiti`
-    GROUP BY ospite
-    ORDER BY numero_prenotazioni DESC
+    INNER JOIN ospiti
+    ON ospiti.id = prenotazioni_has_ospiti.ospite_id
+    GROUP BY ospite  
+    ORDER BY `numero_prenotazioni`  DESC
 
 
 

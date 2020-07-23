@@ -99,10 +99,10 @@ status è 'pending' quindi NON pagato ancora!
 4. Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono
    più frequenti
 
-    SELECT HOUR(`created_at`) AS ore, COUNT(*) AS numero_prenotazioni
-    FROM `prenotazioni`
-    GROUP BY ore
-    ORDER BY numero_prenotazioni DESC
+     SELECT DATE_FORMAT(`created_at`, '%H') AS ore, COUNT(*) AS numero_prenotazioni
+     FROM `prenotazioni`
+     GROUP BY ore
+     ORDER BY numero_prenotazioni DESC
 
 /==============================================================================/
 5. Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
@@ -133,10 +133,44 @@ status è 'pending' quindi NON pagato ancora!
 /==============================================================================/
 2. Stampare tutti gli ospiti per ogni prenotazione
 
+    SELECT ospiti.id, `name`, `lastname`, DATE(prenotazioni.created_at) AS prenotato
+    FROM `prenotazioni_has_ospiti`
+
+    INNER JOIN ospiti
+    ON prenotazioni_has_ospiti.ospite_id = ospiti.id
+
+    INNER JOIN prenotazioni
+    ON prenotazioni_has_ospiti.prenotazione_id = prenotazioni.id
+
+
+    ORDER BY prenotato ASC
 
 /==============================================================================/
 3. Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte
    a Maggio 2018
+
+    SELECT
+      ospiti.name AS nome_ospite,
+      ospiti.lastname AS cognome_ospite,
+      pagamenti.price,
+      paganti.name AS nome_pagante,
+      paganti.lastname cognome_pagante,
+      DATE_FORMAT(prenotazioni.created_at, '%d-%m-%Y') AS prenotato
+
+    FROM `pagamenti`
+
+    LEFT JOIN paganti
+    ON paganti.id = pagamenti.pagante_id
+
+    LEFT JOIN ospiti
+    ON ospiti.id = paganti.ospite_id
+
+    LEFT JOIN prenotazioni
+    ON prenotazioni.id = pagamenti.prenotazione_id
+
+    WHERE
+      DATE_FORMAT(prenotazioni.created_at, '%m-%Y') = '05-2018'
+    ORDER BY prenotato ASC
 
 
 /==============================================================================/

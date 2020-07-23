@@ -93,16 +93,24 @@ status è 'pending' quindi NON pagato ancora!
     INNER JOIN stanze
     ON stanze.id = `stanza_id`
     GROUP BY stanze.id
-    ORDER BY COUNT(*) DESC
+    ORDER BY `room_number` ASC
 
 /==============================================================================/
 4. Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono
    più frequenti
 
+    SELECT HOUR(`created_at`) AS ore, COUNT(*) AS numero_prenotazioni
+    FROM `prenotazioni`
+    GROUP BY ore
+    ORDER BY numero_prenotazioni DESC
 
 /==============================================================================/
 5. Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
 
+    SELECT `ospite_id` AS ospite, COUNT(*) AS numero_prenotazioni
+    FROM `prenotazioni_has_ospiti`
+    GROUP BY ospite
+    ORDER BY numero_prenotazioni DESC
 
 
 

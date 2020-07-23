@@ -111,7 +111,7 @@ status è 'pending' quindi NON pagato ancora!
     FROM `prenotazioni_has_ospiti`
     INNER JOIN ospiti
     ON ospiti.id = prenotazioni_has_ospiti.ospite_id
-    GROUP BY ospite  
+    GROUP BY ospite
     ORDER BY `numero_prenotazioni`  DESC
 
 

@@ -122,6 +122,13 @@ status è 'pending' quindi NON pagato ancora!
 /==============================================================================/
 1. Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
 
+    SELECT `ospite_id`, `name`, `lastname`, COUNT(`prenotazione_id`) AS numero_prenotazioni
+    FROM `prenotazioni_has_ospiti`
+    INNER JOIN ospiti
+    ON ospiti.id = prenotazioni_has_ospiti.ospite_id
+    GROUP BY `ospite_id`
+    HAVING  `numero_prenotazioni` > '2'
+
 
 /==============================================================================/
 2. Stampare tutti gli ospiti per ogni prenotazione

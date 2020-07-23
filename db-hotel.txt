@@ -47,3 +47,75 @@ status è 'pending' quindi NON pagato ancora!
     SELECT `name`, `lastname`, `date_of_birth`, `document_type`
     FROM `ospiti`
     WHERE `date_of_birth` LIKE '1975%' AND `document_type` = 'Driver License'
+
+
+/==============================================================================/
+7. Quanti paganti sono anche ospiti?
+
+    SELECT COUNT(`ospite_id`) AS ospiti_paganti
+    FROM `paganti`
+
+    Result: 14
+
+/==============================================================================/
+8. Quanti posti letto ha l’hotel in totale?
+
+    SELECT SUM(`beds`)
+    FROM `stanze`
+
+    Result: 33 (LETTI, perche le configurazioni e le stanze non sono collegati!!!)
+
+    
+
+/==============================================================================/
+/============================ GROUP BY ========================================/
+/==============================================================================/
+1. Conta gli ospiti raggruppandoli per anno di nascita
+
+
+/==============================================================================/
+2. Somma i prezzi dei pagamenti raggruppandoli per status
+
+
+/==============================================================================/
+3. Conta quante volte è stata prenotata ogni stanza
+
+
+/==============================================================================/
+4. Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono
+   più frequenti
+
+
+/==============================================================================/
+5. Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
+
+
+
+
+
+/==============================================================================/
+/============================== JOIN ==========================================/
+/==============================================================================/
+1. Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
+
+
+/==============================================================================/
+2. Stampare tutti gli ospiti per ogni prenotazione
+
+
+/==============================================================================/
+3. Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte
+   a Maggio 2018
+
+
+/==============================================================================/
+4. Fai la somma di tutti i prezzi delle prenotazioni per le stanze del
+   primo piano
+
+
+/==============================================================================/
+5. Prendi i dati di fatturazione per la prenotazione con id=7
+
+/==============================================================================/
+6. Le stanze sono state tutte prenotate almeno una volta?
+   (Visualizzare le stanze non ancora prenotate)

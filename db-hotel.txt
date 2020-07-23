@@ -65,21 +65,35 @@ status è 'pending' quindi NON pagato ancora!
 
     Result: 33 (LETTI, perche le configurazioni e le stanze non sono collegati!!!)
 
-    
+
 
 /==============================================================================/
 /============================ GROUP BY ========================================/
 /==============================================================================/
 1. Conta gli ospiti raggruppandoli per anno di nascita
 
+    SELECT YEAR(`date_of_birth`) AS anno_di_nascita, COUNT(id) AS ospiti
+    FROM `ospiti`
+    GROUP BY YEAR(`date_of_birth`)
+
 
 /==============================================================================/
 2. Somma i prezzi dei pagamenti raggruppandoli per status
+
+    SELECT `status` AS stato_pagamento, SUM(`price`) AS totale
+    FROM `pagamenti`
+    GROUP BY `status`
 
 
 /==============================================================================/
 3. Conta quante volte è stata prenotata ogni stanza
 
+    SELECT `room_number` AS camera, COUNT(*) AS numero_prenotazioni
+    FROM `prenotazioni`
+    INNER JOIN stanze
+    ON stanze.id = `stanza_id`
+    GROUP BY stanze.id
+    ORDER BY COUNT(*) DESC
 
 /==============================================================================/
 4. Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono
